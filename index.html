@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Last Rune - Fast-paced PvP Action Game with Magic Battles</title>
+	<meta name="description" content="The Last Rune: Fast-paced PvP action game where you can pick heroes, use unique skills and battle players worldwide in runic magic combat.">
+	<meta name="keywords" content="The Last Rune, PvP game, action game, magic battles, runic magic, online battles">
+	<meta name="author" content="The Last Rune Team">
+	<meta property="og:title" content="The Last Rune - Fast-paced PvP Action Game">
+	<meta property="og:description" content="Become a legend in the world of runic magic and battles. Fast-paced PvP action with unique heroes and skills.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://lastrune.com">
+	<meta property="og:image" content="logo_text-min.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@The_LastRune">
+	<link rel="canonical" href="https://lastrune.com">
+	<link rel="icon" href="logo.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			background-color: #000;
+		}
+
+		body {
+			background: linear-gradient(20deg, #07154075, #ff000029), url(web_ill_background_1-min.png) no-repeat center center;
+			background-size: cover;
+			color: white;
+			font-family: 'Montserrat', sans-serif;
+			overflow-x: hidden;
+			min-height: 100vh;
+		}
+
+		.overlay {
+			width: 100%;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			position: relative;
+		}
+
+		.content {
+			text-align: center;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		}
+
+		.header {
+			margin-bottom: 175px;
+			text-align: center;
+			position: relative;
+			z-index: 5;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+
+		.logo-container {
+			display: flex;
+			height: 250px;
+			width: 250px;
+			background: url('logo_text-min.png') no-repeat center center;
+			background-size: 250px 250px;
+			alt: "The Last Rune Logo";
+		}
+
+		.hero-silhouettes {
+			position: absolute;
+			width: 100%;
+			height: 100vh;
+			top: 0;
+			left: 0;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.hero-silhouette {
+			position: relative;
+			height: 100vh;
+			width: 600px;
+			z-index: 1;
+
+			animation: hero 25s linear infinite;
+		}
+
+		.hero-silhouette img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			object-position: bottom;
+			mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0));
+		}
+
+		.tagline {
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+			line-height: 1.4;
+			text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+		}
+
+		.description {
+			font-size: 1rem;
+			line-height: 1.4;
+			margin-bottom: 10px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+			z-index: 5;
+		}
+
+		.highlight {
+			color: #61dafb;
+		}
+
+		.dev-status {
+			font-size: 1.2rem;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			color: #61dafb;
+			margin-bottom: 10px;
+			opacity: 0.9;
+			position: relative;
+			z-index: 5;
+		}
+
+		.twitter {
+			font-size: 1rem;
+			color: rgba(255, 255, 255, 0.8);
+			position: relative;
+			z-index: 5;
+		}
+
+		.twitter a {
+			color: #61dafb;
+			text-decoration: none;
+			transition: opacity 0.3s ease;
+		}
+
+		.twitter a:hover {
+			opacity: 0.8;
+		}
+
+		.copyright {
+			position: absolute;
+			bottom: 20px;
+			font-size: 0.9rem;
+			opacity: 0.7;
+			z-index: 4;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.particles {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			z-index: 1;
+		}
+
+		.particle {
+			position: absolute;
+			width: 3px;
+			height: 3px;
+			background-color: rgba(255, 94, 0, 0.6);
+			border-radius: 50%;
+			animation: float 7.5s infinite linear;
+			z-index: 1;
+		}
+
+		@keyframes float {
+			0% {
+				transform: translateY(0) translateX(0);
+				opacity: 0;
+			}
+
+			10% {
+				opacity: 1;
+			}
+
+			90% {
+				opacity: 1;
+			}
+
+			100% {
+				transform: translateY(-1000px) translateX(300px);
+				opacity: 0;
+			}
+		}
+
+		@keyframes hero {
+			0% {
+				transform: translate(25px, 0);
+			}
+
+			25% {
+				transform: translate(0, 25px);
+			}
+
+			50% {
+				transform: translate(-40px, 0);
+			}
+
+			75% {
+				transform: translate(0, -25px);
+			}
+
+			100% {
+				transform: translate(25px, 0);
+			}
+		}
+
+		@media (max-width: 768px) {
+			.tagline {
+				font-size: 1rem;
+			}
+
+			.description {
+				font-size: 1rem;
+				max-width: 300px;
+			}
+		}
+	</style>
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "VideoGame",
+			"name": "The Last Rune",
+			"description": "Fast-paced PvP action game where you can pick heroes, use unique skills and battle players worldwide in runic magic combat.",
+			"genre": ["Action", "PvP", "Fantasy"],
+			"gamePlatform": ["PC", "Mobile"],
+			"applicationCategory": "Game",
+			"operatingSystem": "Cross Platform",
+			"image": "logo_text-min.png",
+			"url": "https://lastrune.com",
+			"offers": {
+				"@type": "Offer",
+				"availability": "https://schema.org/ComingSoon",
+				"price": "0",
+				"priceCurrency": "USD"
+			}
+		}
+	</script>
+</head>
+
+<body>
+<div class="overlay">
+	<div class="particles" id="particles"></div>
+
+	<div class="content">
+		<header class="header">
+			<h1 style="position:absolute; width:1px; height:1px; overflow:hidden;">The Last Rune - Fast-paced PvP Action Game</h1>
+			<p class="tagline">Become a <span class="highlight">legend</span> in the world of runic magic and battles
+			</p>
+			<p class="description">Fast-paced PvP action! Pick a <span class="highlight">hero</span>, use <span
+					class="highlight">unique skills</span>, and battle players worldwide. Quick matches, epic
+				fights—become a <span class="highlight">legend</span>!</p>
+			<p class="dev-status">In Development</p>
+			<p class="twitter">Follow us for updates <a href="https://twitter.com/The_LastRune" aria-label="Follow The Last Rune on Twitter">Twitter</a></p>
+		</header>
+	</div>
+
+	<div class="hero-silhouettes">
+		<div class="hero-silhouette"><img src="web_ill_sorceress-min.png" alt="Sorceress Hero Character from The Last Rune Game" loading="lazy"></div>
+	</div>
+
+	<footer class="copyright">
+		<div class="logo-container" role="img" aria-label="The Last Rune Logo"></div>
+		<div>© 2025 The Last Rune</div>
+	</footer>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const particles = document.getElementById('particles');
+		const particleCount = 200;
+
+		for (let i = 0; i < particleCount; i++) {
+			let particle = document.createElement('div');
+			particle.className = 'particle';
+
+			// Random position
+			const posX = Math.random() * 100 - 10;
+			const posY = Math.random() * 100 + 100;
+
+			// Random size
+			const size = Math.random() * 4 + 1;
+
+			// Random animation duration
+			const duration = Math.random() * 20 + 10;
+
+			// Random animation delay
+			const delay = Math.random() * 10;
+
+			// Apply styles
+			particle.style.left = `${posX}%`;
+			particle.style.top = `${posY}%`;
+			particle.style.width = `${size}px`;
+			particle.style.height = `${size}px`;
+			particle.style.opacity = Math.random() * 0.5 + 0.3;
+			particle.style.animationDuration = `${duration}s`;
+			particle.style.animationDelay = `${delay}s`;
+
+			particles.appendChild(particle);
+		}
+	});
+</script>
+</body>
+
+</html>
